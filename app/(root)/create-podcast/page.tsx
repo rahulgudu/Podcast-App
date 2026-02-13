@@ -31,12 +31,12 @@ const CreatePodcast = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const voices = [
-    { key: "voice1", label: "alloy" },
-    { key: "voice2", label: "shimmer" },
-    { key: "voice3", label: "nova" },
-    { key: "voice4", label: "echo" },
-    { key: "voice5", label: "fable" },
-    { key: "voice6", label: "onyx" },
+    { key: "voice1", label: "Alloy" },
+    { key: "voice2", label: "Shimmer" },
+    { key: "voice3", label: "Nova" },
+    { key: "voice4", label: "Echo" },
+    { key: "voice5", label: "Fable" },
+    { key: "voice6", label: "Onyx" },
   ];
   return (
     <section className="mt-10 flex flex-col">
@@ -52,10 +52,17 @@ const CreatePodcast = () => {
               <Input
                 type="text"
                 classNames={{
-                  input: [
-                    "input-class",
-                    "focus-visible:ring-orange-1",
-                    "p-2 mt-2",
+                  base: "mt-2",
+                  input: ["input-class", "outline-none", "p-2", "text-white-1"],
+                  inputWrapper: [
+                    "border-none",
+                    "ring-1 ring-black-5",
+                    "focus-within:ring-2",
+                    "focus-within:ring-orange-1",
+                    "transition-all duration-300",
+                    "rounded-md",
+                    "overflow-visible",
+                    "bg-black-1",
                   ],
                 }}
                 placeholder="Demo Podcast"
@@ -71,25 +78,53 @@ const CreatePodcast = () => {
               <Select
                 items={voices}
                 classNames={{
-                  base: "w-full p-2 rounded-xl",
-                  trigger:
-                    "relative bg-black-1 border-none min-h-[40px] flex items-center",
+                  base: "w-full rounded-xl",
+                  trigger: [
+                    "relative",
+                    "bg-black-1",
+                    "border-none",
+                    "ring-1 ring-black-5", // idle border
+                    "focus:ring-2",
+                    "focus:ring-orange-1", // focus ring
+                    "transition-all duration-300",
+                    "min-h-[44px]",
+                    "flex items-center",
+                    "px-3",
+                    "rounded-xl",
+                    "overflow-visible",
+                  ],
                   value: "text-left text-white-1 w-full",
-                  selectorIcon:
-                    "absolute right-3 text-white-1 pointer-events-none",
-                  popoverContent: "bg-black-1 border border-black-5",
+                  selectorIcon: [
+                    "absolute",
+                    "right-3",
+                    "text-white-1",
+                    "pointer-events-none",
+                  ],
+                  popoverContent: [
+                    "bg-black-1",
+                    "border border-black-5",
+                    "rounded-xl",
+                  ],
                 }}>
                 <SelectSection>
                   {voices.map((item) => (
                     <SelectItem
                       key={item.key}
                       textValue={item.label}
-                      className="capitalize text-white-1 focus:bg-orange-1 p-2">
+                      className={[
+                        "capitalize",
+                        "text-white-1",
+                        "p-2",
+                        "rounded-lg",
+                        "focus:bg-orange-1",
+                        "data-[hover=true]:bg-orange-1",
+                      ].join(" ")}>
                       {item.label.toUpperCase()}
                     </SelectItem>
                   ))}
                 </SelectSection>
               </Select>
+
               {voiceType && (
                 <audio
                   key={voiceType} // important: forces replay on change
@@ -105,15 +140,28 @@ const CreatePodcast = () => {
                 Podcast Description
               </label>
               <Textarea
-                type="text"
                 classNames={{
+                  base: "mt-2",
                   input: [
                     "input-class",
-                    "focus-visible:ring-orange-1",
-                    "p-2 mt-2",
+                    "outline-none",
+                    "text-white-1",
+                    "resize-none",
+                  ],
+                  inputWrapper: [
+                    "border-none", // remove default border
+                    "ring-1 ring-black-5", // idle state
+                    "focus-within:ring-2",
+                    "focus-within:ring-orange-1",
+                    "transition-all duration-300",
+                    "rounded-xl",
+                    "p-3",
+                    "overflow-visible", // prevents clipping
+                    "bg-black-1",
                   ],
                 }}
                 placeholder="Podcast Description"
+                minRows={3}
               />
             </div>
           </div>
